@@ -1,0 +1,11 @@
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\bin\Debug\SimulatedAnnealing.exe.config
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\bin\Debug\SimulatedAnnealing.exe
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\bin\Debug\SimulatedAnnealing.pdb
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\obj\Debug\SimulatedAnnealing.csproj.AssemblyReference.cache
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\obj\Debug\SimulatedAnnealing.csproj.SuggestedBindingRedirects.cache
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\obj\Debug\SimulatedAnnealing.Form1.resources
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\obj\Debug\SimulatedAnnealing.Properties.Resources.resources
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\obj\Debug\SimulatedAnnealing.csproj.GenerateResource.cache
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\obj\Debug\SimulatedAnnealing.csproj.CoreCompileInputs.cache
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\obj\Debug\SimulatedAnnealing.exe
+E:\Основы искусственного интеллекта\SimulatedAnnealing\SimulatedAnnealing\obj\Debug\SimulatedAnnealing.pdb
