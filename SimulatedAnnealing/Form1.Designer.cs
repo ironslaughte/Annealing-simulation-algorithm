@@ -36,6 +36,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.startButton = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.labelGraph = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -105,25 +107,42 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(354, 24);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(383, 174);
+            this.richTextBox1.Size = new System.Drawing.Size(374, 371);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 226);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(148, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Матрица смежности графа:";
+            // 
+            // labelGraph
+            // 
+            this.labelGraph.AutoSize = true;
+            this.labelGraph.Location = new System.Drawing.Point(13, 243);
+            this.labelGraph.Name = "labelGraph";
+            this.labelGraph.Size = new System.Drawing.Size(0, 13);
+            this.labelGraph.TabIndex = 11;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 109);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(185, 13);
+            this.label4.Size = new System.Drawing.Size(123, 13);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Функция понижение температуры:";
+            this.label4.Text = "Выбор загрузки графа";
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "F = начальная температура * 0,1 / номер интераци",
-            "F = начальная температура / номер итерации"});
+            "Из файла",
+            "Рандомный граф"});
             this.comboBox1.Location = new System.Drawing.Point(12, 125);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(303, 21);
@@ -134,7 +153,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 224);
+            this.ClientSize = new System.Drawing.Size(736, 415);
+            this.Controls.Add(this.labelGraph);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.richTextBox1);
@@ -162,6 +183,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelGraph;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
     }

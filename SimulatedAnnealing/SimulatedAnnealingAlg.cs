@@ -12,20 +12,21 @@ namespace SimulatedAnnealing
         private int[][] _dists;
         private List<int> _state;
 
-        public Func<double,int,double> Decrease { private get; set; }
 
-
-        public SimulatedAnnealingAlg(int numCities, double initialTemperature, double endTemperature)
+        public SimulatedAnnealingAlg(int numCities, double initialTemperature, double endTemperature, int[][] dists = null)
         {
             _numCities = numCities;
             _initialTemperature = initialTemperature;
             _endTemperature = endTemperature;
-            MakeGraphDistances();
+            if (dists != null)
+                _dists = dists;
+            else
+                _dists = GraphMaker.MakeGraphDistances(numCities);
+            InitRandomFirstState();
         }
 
-        public IEnumerable<(double,double)> Run()
-        {
-            InitFirstState();
+        public IEnumerable<(double,double)> StartAlgSimulatedAnnealing()
+        {           
             _bestEnergy = CalculateEnergy(_state);
             double temperature = _initialTemperature;
             int i = 1;
@@ -33,35 +34,36 @@ namespace SimulatedAnnealing
             {
                 List<int> stateCandidate = GenerateStateCandidate();
                 double candidateEnergy = CalculateEnergy(stateCandidate);
-                if(candidateEnergy < _bestEnergy)
-                {
-                    SetNewBestState(stateCandidate, candidateEnergy);
-                }
-                else
-                {
-                    double p = GetTransitionProbability(candidateEnergy - _bestEnergy, temperature);
-                    if (MakeTransit(p))
-                        SetNewBestState(stateCandidate, candidateEnergy);
-                }
+                MakeNewState(temperature, stateCandidate, candidateEnergy);
                 yield return (_bestEnergy, temperature);
-                temperature = DecreaseTemperature(i);
+                temperature = _initialTemperature / i;
                 i++;
             }
         }
 
-        private void SetNewBestState(List<int> stateCandidate, double candidateEnergy)
+        private void MakeNewState(double temperature, List<int> stateCandidate, double candidateEnergy)
         {
-            _state = stateCandidate;
-            _bestEnergy = candidateEnergy;
+            if (candidateEnergy < _bestEnergy)
+            {
+                _state = stateCandidate;
+                _bestEnergy = candidateEnergy;
+            }
+            else
+            {
+                double p = Math.Exp(-(candidateEnergy - _bestEnergy) / temperature);
+                if (random.NextDouble() < p)
+                {
+                    _state = stateCandidate;
+                    _bestEnergy = candidateEnergy;
+                }
+                    
+            }
         }
 
         public double GetBestEnergy() => _bestEnergy;
+        public int[][] GetGraph() => _dists;
 
-        private double DecreaseTemperature(int i) => Decrease(_initialTemperature ,i);
-
-        private bool MakeTransit(double p) => random.Next() < p;
-
-        private double GetTransitionProbability(double energy, double temperature) => Math.Exp(-energy / temperature);
+        public List<int> GetBestState() => _state;
 
         private List<int> GenerateStateCandidate()
         {
@@ -72,16 +74,24 @@ namespace SimulatedAnnealing
             int idxSecondCity = stateCandidate.FindIndex(x => x == j);
             if (idxFirstCity > idxSecondCity)
             {
-                while(idxFirstCity > idxSecondCity)
+                while (idxFirstCity > idxSecondCity)
+                {
                     stateCandidate.Swap(idxFirstCity--, idxSecondCity++);
+                    idxFirstCity -= 1;
+                    idxSecondCity += 1;
+                }
+
             }
             else
             {
                 while (idxFirstCity < idxSecondCity)
-                    stateCandidate.Swap(idxFirstCity++, idxSecondCity--);
+                {
+                    stateCandidate.Swap(idxFirstCity, idxSecondCity);
+                    idxFirstCity += 1;
+                    idxSecondCity -= 1;
+                }
             }
-                
-
+               
             return stateCandidate;
         }
 
@@ -91,10 +101,11 @@ namespace SimulatedAnnealing
             for(int i = 0; i < _numCities-1; i++)
                 res += Distance(state[i], state[i + 1]);
 
+            res += Distance(state[0], state[_numCities - 1]);
             return res;
         }
 
-        private void InitFirstState()
+        private void InitRandomFirstState()
         {
             _state = new List<int>();
 
@@ -109,23 +120,7 @@ namespace SimulatedAnnealing
                 _state[i] = tmp;
             }
 
-        }
-        private void MakeGraphDistances()
-        {
-            _dists = new int[_numCities][];
-            for (int i = 0; i <= _dists.Length - 1; i++)
-                _dists[i] = new int[_numCities];
-            for (int i = 0; i <= _numCities - 1; i++)
-            {
-                for (int j = i + 1; j <= _numCities - 1; j++)
-                {
-                    int d = random.Next(1, 9);
-                    _dists[i][j] = d;
-                    _dists[j][i] = d;
-                }
-            }
-        }
-
+        }      
         private double Distance(int cityX, int cityY) => _dists[cityX][cityY];
     }
 }
